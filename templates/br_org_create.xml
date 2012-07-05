@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0
+     epp-1.0.xsd">
+  <command>
+    <create>
+      <contact:create
+       xmlns:contact="urn:ietf:params:xml:ns:contact-1.0"
+       xsi:schemaLocation="urn:ietf:params:xml:ns:contact-1.0
+       contact-1.0.xsd">
+        <contact:id>$(id)$</contact:id>
+	$(postal_info)$
+	$(voice)$
+	$(fax)$
+        <contact:email>$(email)$</contact:email>
+	$(auth_info)$        
+	$(disclose)$
+      </contact:create>
+    </create>
+    <extension>
+      <brorg:create
+	  xmlns:brorg='urn:ietf:params:xml:ns:brorg-1.0'
+	  xsi:schemaLocation='urn:ietf:params:xml:ns:brorg-1.0
+			      brorg-1.0.xsd'>
+	<brorg:organization>$(organization)$</brorg:organization>
+	$(brorg_contact_list)$
+	$(responsible)$
+      </brorg:create>
+    </extension>
+    $(clTRID)$
+  </command>
+</epp>

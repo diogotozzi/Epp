@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0
+     epp-1.0.xsd">
+ <command>
+  <create>
+   <ipnetwork:create
+    xmlns:ipnetwork="urn:ietf:params:xml:ns:ipnetwork-1.0"
+    xsi:schemaLocation="urn:ietf:params:xml:ns:ipnetwork-1.0 
+    ipnetwork-1.0.xsd">
+    <ipnetwork:ipRange $(ipRange.version)$>
+     <ipnetwork:startAddress>$(ipRange.begin)$</ipnetwork:startAddress>
+     <ipnetwork:endAddress>$(ipRange.end)$</ipnetwork:endAddress>
+    </ipnetwork:ipRange>
+    <ipnetwork:organization>$(organization)$</ipnetwork:organization>
+    $(allocType)$
+    $(asn)$
+    $(contacts)$
+    $(reversesDns)$
+   </ipnetwork:create>
+  </create>
+  $(clTRID)$
+ </command>
+</epp>
