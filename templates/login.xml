@@ -13,9 +13,8 @@
         <lang>$(lang)$</lang>
       </options>
       <svcs>
-	<objURI>urn:ietf:params:xml:ns:domain-1.0</objURI>
-	<objURI>urn:ietf:params:xml:ns:contact-1.0</objURI>
-	$(extURI)$
+	    <objURI>urn:ietf:params:xml:ns:domain-1.0</objURI>
+	    <objURI>urn:ietf:params:xml:ns:contact-1.0</objURI>
       </svcs>
     </login>
     $(clTRID)$
