@@ -1,0 +1,6 @@
+{
+    "name": "hostinger/registrobr",
+    "description": "Registro.br EPP",
+    "type": "library",
+    "require": {}
+}
