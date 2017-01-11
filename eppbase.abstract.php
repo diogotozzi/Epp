@@ -59,6 +59,7 @@
 
         public function connect()
         {
+	    $this->_cert = dirname(__FILE__) . '/client.pem';
             $fc = stream_context_create(array(
                 'ssl' => array(
 		            'allow_self_signed'=>'TRUE',
