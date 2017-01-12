@@ -62,7 +62,7 @@
 	    $this->_cert = dirname(__FILE__) . '/client.pem';
             $fc = stream_context_create(array(
                 'ssl' => array(
-		            'allow_self_signed'=>'TRUE',
+		            'cafile'  => dirname(__FILE__) . '/root.pem',
 		            'local_cert' => $this->_cert
                 )
 			));
