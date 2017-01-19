@@ -660,6 +660,8 @@
             $domain_period = 1,
             $dns_1 = null,
             $dns_2 = null,
+            $dns_3 = null,
+            $dns_4 = null,
             $org_id = null,
             $auto_renew = 0
         )
@@ -674,6 +676,12 @@
                                 </domain:hostAttr>
                                 <domain:hostAttr>
                                     <domain:hostName>{$dns_2}</domain:hostName>
+                                </domain:hostAttr>
+                                <domain:hostAttr>
+                                    <domain:hostName>{$dns_3}</domain:hostName>
+                                </domain:hostAttr>
+                                <domain:hostAttr>
+                                    <domain:hostName>{$dns_4}</domain:hostName>
                                 </domain:hostAttr>
                             </domain:ns>";
                             
@@ -776,6 +784,8 @@
             $domain_name = null,
             $dns_1 = null,
             $dns_2 = null,
+            $dns_3 = null,
+            $dns_4 = null,
             $client_id = null,
             $org_id = null,
             $auto_renew = 0
@@ -826,6 +836,12 @@
                         <domain:hostAttr>
                             <domain:hostName>{$domain_data['domain_dns']['dns_2']}</domain:hostName>
                         </domain:hostAttr>
+                        <domain:hostAttr>
+                            <domain:hostName>{$domain_data['domain_dns']['dns_3']}</domain:hostName>
+                        </domain:hostAttr>
+                        <domain:hostAttr>
+                            <domain:hostName>{$domain_data['domain_dns']['dns_4']}</domain:hostName>
+                        </domain:hostAttr>
                     </domain:rem>
                     
                     <domain:add>
@@ -834,6 +850,12 @@
                         </domain:hostAttr>
                         <domain:hostAttr>
                             <domain:hostName>{$dns_2}</domain:hostName>
+                        </domain:hostAttr>
+                        <domain:hostAttr>
+                            <domain:hostName>{$dns_3}</domain:hostName>
+                        </domain:hostAttr>
+                        <domain:hostAttr>
+                            <domain:hostName>{$dns_4}</domain:hostName>
                         </domain:hostAttr>
                     </domain:add>";
             
