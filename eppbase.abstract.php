@@ -13,6 +13,7 @@
      */
     abstract class EppBase
     {
+        use Dic;
         // {{{ properties
 
         /**
@@ -21,7 +22,7 @@
          * @var string
          * @access protected
          */
-        protected $_host        = 'beta.registro.br';
+        protected $_host        = 'epp.registro.br';
 
         /**
          * Registro.br port
@@ -59,9 +60,10 @@
 
         public function connect()
         {
+	    $this->_cert = dirname(__FILE__) . '/client.pem';
             $fc = stream_context_create(array(
                 'ssl' => array(
-		            'allow_self_signed'=>'TRUE',
+                    'cafile'  => dirname(__FILE__) . '/root.pem',
 		            'local_cert' => $this->_cert
                 )
 			));
@@ -98,18 +100,29 @@
                 $unpacked = unpack('N', $packet_header);
                 $answer = fread($this->_socket, $unpacked[1] - 4);
             }
+
+            try {
+                $di = $this->getDic();
+                $di['monolog_registrar']->addError('registrar.registrobr', array('request' => 'XML RESPONSE:', 'response' => $answer));
+            } catch (Exception $e) {}
             
             return $answer;
         }
 
         protected function send_command($xml = null)
         {
+            try {
+                $di = $this->getDic();
+                $di['monolog_registrar']->addError('registrar.registrobr', array('request' => 'XML REQUEST:', 'response' => $xml));
+            } catch (Exception $e) {}
+
             return fwrite($this->_socket, $xml);
         }
 
         public function login($user = null, $password = null, $new_password = null, $language = 'pt')
         {
-            $xml = file_get_contents('./templates/login.xml');
+            $this->_password = $password;
+            $xml = file_get_contents(dirname(__FILE__) . '/templates/login.xml');
             
             if(strlen($new_password) >= 5)
             {
@@ -134,7 +147,7 @@
 
         public function logout()
         {
-            $xml = file_get_contents('./templates/logout.xml');
+            $xml = file_get_contents(dirname(__FILE__) . '/templates/logout.xml');
             
             $xml = str_replace('$(clTRID)$', '<clTRID>'.$this->generate_id().'</clTRID>', $xml);
             

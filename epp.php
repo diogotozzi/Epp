@@ -31,7 +31,7 @@
          */
         public function contact_info($client_id = null)
         {
-            $xml = file_get_contents('./templates/contact_info.xml');
+            $xml = file_get_contents(dirname(__FILE__) . '/templates/contact_info.xml');
             
             $auth_info = "<contact:authInfo>
                                 <contact:pw>{$this->_password}</contact:pw>
@@ -105,7 +105,7 @@
             $client_email = null
         )
         {
-            $xml = file_get_contents('./templates/contact_create.xml');
+            $xml = file_get_contents(dirname(__FILE__) . '/templates/contact_create.xml');
             
             $postal_info = "<contact:postalInfo type=\"loc\">
                                 <contact:name>{$client_name}</contact:name>
@@ -189,7 +189,7 @@
             $client_email = null
         )
         {
-            $xml = file_get_contents('./templates/contact_update.xml');
+            $xml = file_get_contents(dirname(__FILE__) . '/templates/contact_update.xml');
             
             $chg = "<contact:chg>
                         <contact:postalInfo type=\"loc\">
@@ -242,7 +242,7 @@
          */
         public function org_check($org_id = null)
         {
-            $xml = file_get_contents('./templates/br_org_check.xml');
+            $xml = file_get_contents(dirname(__FILE__) . '/templates/br_org_check.xml');
             
             $organization_list = "<brorg:cd>
                                     <brorg:id>{$org_id}</brorg:id>
@@ -289,7 +289,7 @@
          */
         public function org_info($org_id = null)
         {
-            $xml = file_get_contents('./templates/br_org_info.xml');
+            $xml = file_get_contents(dirname(__FILE__) . '/templates/br_org_info.xml');
             
             $auth_info = "<contact:authInfo>
                                 <contact:pw>{$this->_password}</contact:pw>
@@ -378,7 +378,7 @@
             $contact_name = null
         )
         {
-            $xml = file_get_contents('./templates/br_org_create.xml');
+            $xml = file_get_contents(dirname(__FILE__) . '/templates/br_org_create.xml');
             
             $postal_info = "<contact:postalInfo type=\"loc\">
                                 <contact:name>{$org_name}</contact:name>
@@ -475,7 +475,7 @@
             $contact_name = null
         )
         {
-            $xml = file_get_contents('./templates/br_org_update.xml');
+            $xml = file_get_contents(dirname(__FILE__) . '/templates/br_org_update.xml');
             
             $chg = "<contact:chg>
                         <contact:postalInfo type=\"loc\">
@@ -529,7 +529,7 @@
          */
         public function domain_check($domain_name = null)
         {
-            $xml = file_get_contents('./templates/br_domain_check.xml');
+            $xml = file_get_contents(dirname(__FILE__) . '/templates/br_domain_check.xml');
             
             $domains_list = "<domain:name>{$domain_name}</domain:name>";
             
@@ -571,7 +571,7 @@
          */
         public function domain_info($ticket_number = null, $domain_name = null)
         {
-            $xml = file_get_contents('./templates/br_domain_info.xml');
+            $xml = file_get_contents(dirname(__FILE__) . '/templates/br_domain_info.xml');
             
             $auth_info = "<contact:authInfo>
                                 <contact:pw>{$this->_password}</contact:pw>
@@ -660,11 +660,13 @@
             $domain_period = 1,
             $dns_1 = null,
             $dns_2 = null,
+            $dns_3 = null,
+            $dns_4 = null,
             $org_id = null,
             $auto_renew = 0
         )
         {
-            $xml = file_get_contents('./templates/br_domain_create.xml');
+            $xml = file_get_contents(dirname(__FILE__) . '/templates/br_domain_create.xml');
             
             $period = "<domain:period unit=\"y\">{$domain_period}</domain:period>";
             
@@ -674,6 +676,12 @@
                                 </domain:hostAttr>
                                 <domain:hostAttr>
                                     <domain:hostName>{$dns_2}</domain:hostName>
+                                </domain:hostAttr>
+                                <domain:hostAttr>
+                                    <domain:hostName>{$dns_3}</domain:hostName>
+                                </domain:hostAttr>
+                                <domain:hostAttr>
+                                    <domain:hostName>{$dns_4}</domain:hostName>
                                 </domain:hostAttr>
                             </domain:ns>";
                             
@@ -776,6 +784,8 @@
             $domain_name = null,
             $dns_1 = null,
             $dns_2 = null,
+            $dns_3 = null,
+            $dns_4 = null,
             $client_id = null,
             $org_id = null,
             $auto_renew = 0
@@ -783,7 +793,7 @@
         {
             $domain_data = $this->domain_info($ticket_number, $domain_name);
             
-            $xml = file_get_contents('./templates/br_domain_update.xml');
+            $xml = file_get_contents(dirname(__FILE__) . '/templates/br_domain_update.xml');
 
             /**
              *  This array is only used for Registro.br homologation because the homologation
@@ -826,6 +836,12 @@
                         <domain:hostAttr>
                             <domain:hostName>{$domain_data['domain_dns']['dns_2']}</domain:hostName>
                         </domain:hostAttr>
+                        <domain:hostAttr>
+                            <domain:hostName>{$domain_data['domain_dns']['dns_3']}</domain:hostName>
+                        </domain:hostAttr>
+                        <domain:hostAttr>
+                            <domain:hostName>{$domain_data['domain_dns']['dns_4']}</domain:hostName>
+                        </domain:hostAttr>
                     </domain:rem>
                     
                     <domain:add>
@@ -834,6 +850,12 @@
                         </domain:hostAttr>
                         <domain:hostAttr>
                             <domain:hostName>{$dns_2}</domain:hostName>
+                        </domain:hostAttr>
+                        <domain:hostAttr>
+                            <domain:hostName>{$dns_3}</domain:hostName>
+                        </domain:hostAttr>
+                        <domain:hostAttr>
+                            <domain:hostName>{$dns_4}</domain:hostName>
                         </domain:hostAttr>
                     </domain:add>";
             
@@ -903,7 +925,7 @@
          */
         public function domain_renew($domain_name = null, $domain_expiration = null, $domain_year_renovation = 1)
         {
-            $xml = file_get_contents('./templates/domain_renew.xml');
+            $xml = file_get_contents(dirname(__FILE__) . '/templates/domain_renew.xml');
             
             $period = "<domain:period unit=\"y\">{$domain_year_renovation}</domain:period>";
             
@@ -949,7 +971,7 @@
          */
         public function domain_delete($domain_name = null)
         {
-            $xml = file_get_contents('./templates/domain_delete.xml');
+            $xml = file_get_contents(dirname(__FILE__) . '/templates/domain_delete.xml');
             
             $cltrid = '<clTRID>'.$this->generate_id().'</clTRID>';
             
@@ -980,7 +1002,7 @@
          */
         public function poll_request()
         {
-            $xml = file_get_contents('./templates/poll.xml');
+            $xml = file_get_contents(dirname(__FILE__) . '/templates/poll.xml');
             
             $cltrid = '<clTRID>'.$this->generate_id().'</clTRID>';
             
@@ -1025,7 +1047,7 @@
          */
         public function poll_delete($message_id = null)
         {
-            $xml = file_get_contents('./templates/poll.xml');
+            $xml = file_get_contents(dirname(__FILE__) . '/templates/poll.xml');
             
             $cltrid = '<clTRID>'.$this->generate_id().'</clTRID>';
             
